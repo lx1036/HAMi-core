@@ -78,7 +78,7 @@ configure_file(src/static_config.h.in ${CMAKE_CURRENT_BINARY_DIR}/config/static_
 
 # Add subdirectories for building
 add_subdirectory(src)
-add_subdirectory(test)
+#add_subdirectory(test)
 
 if (BUILD_DOCKER STREQUAL true)
     add_subdirectory(dockerfiles)

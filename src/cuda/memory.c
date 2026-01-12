@@ -487,6 +487,14 @@ CUresult cuMemAdvise( CUdeviceptr devPtr, size_t count, CUmem_advise advice, CUd
     return CUDA_OVERRIDE_CALL(cuda_library_entry,cuMemAdvise,devPtr,count,advice,device);
 }
 
+CUresult cuMemAdvise_v2( CUdeviceptr devPtr, size_t count, CUmem_advise advice, CUmemLocation location){
+    LOG_DEBUG("cuMemAdvise_v2 devPtr=%llx count=%lx",devPtr,count);
+    ENSURE_RUNNING();
+    return CUDA_OVERRIDE_CALL(cuda_library_entry,cuMemAdvise_v2,devPtr,count,advice,location);
+    // CUresult CUDAAPI cuMemAdvise(CUdeviceptr devPtr, size_t count, CUmem_advise advice, CUdevice device);
+    // CUresult CUDAAPI cuMemAdvise_v2(CUdeviceptr devPtr, size_t count, CUmem_advise advice, CUmemLocation location);
+}
+
 #ifdef HOOK_MEMINFO_ENABLE
 CUresult cuMemGetInfo_v2(size_t* free, size_t* total) {
     CUdevice dev;
@@ -778,6 +786,13 @@ CUresult cuMemcpy3DPeerAsync(const CUDA_MEMCPY3D_PEER *pCopy, CUstream hStream) 
 CUresult cuMemPrefetchAsync(CUdeviceptr devPtr, size_t count, CUdevice dstDevice, CUstream hStream) {
     LOG_DEBUG("cuMemPrefetchAsync");
     return CUDA_OVERRIDE_CALL(cuda_library_entry,cuMemPrefetchAsync,devPtr,count,dstDevice,hStream);
+}
+
+CUresult cuMemPrefetchAsync_v2(CUdeviceptr devPtr, size_t count, CUmemLocation location, unsigned int flags, CUstream hStream) {
+    // CUresult CUDAAPI cuMemPrefetchAsync(CUdeviceptr devPtr, size_t count, CUdevice dstDevice, CUstream hStream);
+    // CUresult CUDAAPI cuMemPrefetchAsync_v2(CUdeviceptr devPtr, size_t count, CUmemLocation location, unsigned int flags, CUstream hStream);
+    LOG_DEBUG("cuMemPrefetchAsync_v2");
+    return CUDA_OVERRIDE_CALL(cuda_library_entry,cuMemPrefetchAsync_v2,devPtr,count,location,flags,hStream);
 }
 
 CUresult cuMemRangeGetAttribute(void *data, size_t dataSize, CUmem_range_attribute attribute, CUdeviceptr devPtr, size_t count) {

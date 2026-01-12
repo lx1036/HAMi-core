@@ -61,6 +61,12 @@ CUresult cuDeviceGetUuid(CUuuid* uuid,CUdevice dev) {
     return res;
 }
 
+CUresult cuDeviceGetUuid_v2(CUuuid* uuid,CUdevice dev) {
+    LOG_DEBUG("into cuDeviceGetUuid_v2 dev=%d",dev);
+    CUresult res = CUDA_OVERRIDE_CALL(cuda_library_entry,cuDeviceGetUuid_v2,uuid,dev);
+    return res;
+}
+
 CUresult cuDeviceGetDefaultMemPool(CUmemoryPool *pool_out, CUdevice dev) {
     LOG_DEBUG("cuDeviceGetDefaultMemPool");
     return CUDA_OVERRIDE_CALL(cuda_library_entry, cuDeviceGetDefaultMemPool,

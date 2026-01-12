@@ -56,6 +56,12 @@ CUresult cuCtxCreate_v3 ( CUcontext* pctx, CUexecAffinityParam* paramsArray, int
     return res;
 }
 
+CUresult cuCtxCreate_v4( CUcontext* pctx, CUctxCreateParams *ctxCreateParams, unsigned int  flags, CUdevice dev ){
+    LOG_DEBUG("into cuCtxCreate_v3 pctx=%p ctxCreateParams=%p flags=%d dev=%d",pctx, ctxCreateParams,flags,dev);
+    CUresult res = CUDA_OVERRIDE_CALL(cuda_library_entry,cuCtxCreate_v4,pctx,ctxCreateParams,flags,dev);
+    return res;
+}
+
 CUresult cuCtxDestroy_v2 ( CUcontext ctx ){
     LOG_DEBUG("into cuCtxDestroy_v2 ctx=%p",ctx);
     return CUDA_OVERRIDE_CALL(cuda_library_entry,cuCtxDestroy_v2,ctx);
