@@ -74,7 +74,8 @@ FUNC_ATTR_VISIBLE void* dlsym(void* handle, const char* symbol) {
     LOG_DEBUG("into dlsym %s",symbol);
     pthread_once(&dlsym_init_flag,init_dlsym);
     if (real_dlsym == NULL) {
-        real_dlsym = dlvsym(RTLD_NEXT,"dlsym","GLIBC_2.2.5");
+//        real_dlsym = dlvsym(RTLD_NEXT,"dlsym","GLIBC_2.2.5");
+        real_dlsym = dlvsym(RTLD_NEXT,"dlsym","GLIBC_2.17");
         char *path_search=getenv("CUDA_REDIRECT");
         if ((path_search!=NULL) && (strlen(path_search)>0)){
             vgpulib = dlopen(path_search,RTLD_LAZY);
